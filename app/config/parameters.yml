@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: host31.hostinet.com
+    database_port: 3306
+    database_name: py58pezz_daily_2
+    database_user: py58pezz_xavi
+    database_password: pas01pas
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: b8394374e00fe0874a39142ee817ff61db16ecee
