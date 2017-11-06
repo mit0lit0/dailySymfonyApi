@@ -1,0 +1,19 @@
+AppBundle\Entity\Login:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\LoginRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        codlogin:
+            type: string
+            length: 255
+            unique: true
+        pass:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

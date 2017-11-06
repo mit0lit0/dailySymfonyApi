@@ -1,0 +1,61 @@
+AppBundle\Entity\User:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\UserRepository
+    id:
+        coduser:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: true
+        lastname:
+            type: string
+            length: 255
+            nullable: true
+        codlogin:
+            type: string
+            length: 255
+            unique: true
+        email:
+            type: string
+            length: 255
+            nullable: false
+            unique: true
+        birth:
+            type: string
+            length: 255
+            nullable: true
+        sex:
+            type: string
+            length: 255
+            nullable: true
+        location:
+            type: string
+            length: 255
+            nullable: true
+        interestf:
+            type: string
+            length: 255
+            nullable: true
+        nivelf:
+            type: string
+            length: 255
+            nullable: true
+        opinionf:
+            type: string
+            length: 255
+            nullable: true
+        messagef:
+            type: string
+            length: 255
+            nullable: true
+        reservationf:
+            type: string
+            length: 255
+            nullable: true
+    lifecycleCallbacks: {  }
