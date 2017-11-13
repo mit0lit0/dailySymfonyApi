@@ -1,0 +1,36 @@
+AppBundle\Entity\Business:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\BusinessRepository
+    id:
+        codbusiness:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        oficialname:
+            type: string
+            length: 255
+            nullable: true
+        addressf:
+            type: string
+            length: 255
+            nullable: true
+        categoryf:
+            type: string
+            length: 255
+            nullable: true
+        description:
+            type: string
+            length: 255
+            nullable: true
+        photof:
+            type: string
+            length: 255
+            nullable: true
+        contactf:
+            type: string
+            length: 255
+            nullable: true
+    lifecycleCallbacks: {  }

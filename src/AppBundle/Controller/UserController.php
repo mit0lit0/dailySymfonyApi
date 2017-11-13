@@ -34,4 +34,53 @@ class UserController extends FOSRestController
    }
   return $singleresult;
   }
+
+  /**
+ * @Rest\Post("/user")
+ */
+ public function postAction(Request $request)
+ {
+   $user = new User;
+   $name = $request->get('name');
+   $lastname = $request->get('lastname');
+   $codlogin = $request->get('codlogin');
+   if(empty($name) || empty($lastname)|| empty($codlogin))
+   {
+     return new View("Null values are not allowed", Response::HTTP_NOT_ACCEPTABLE);
+   }else{
+     $user->setName($name);
+     $user->setLastname($lastname);
+     $user->setCodlogin($codlogin);
+     $em = $this->getDoctrine()->getManager();
+     $em->persist($user);
+     $pom = $em->flush();
+
+     if($pom) {
+      $this->addFlash(
+          'notice',
+          'You have successfully created post'
+      );
+      }
+    return new View("User Added Successfully", Response::HTTP_OK);
+   }
+ }
+
+ /**
+  * @Rest\Delete("/user/{coduser}")
+  */
+  public function deleteAction($coduser)
+  {
+   $data = new User;
+   $sn = $this->getDoctrine()->getManager();
+   $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($coduser);
+ if (empty($user)) {
+   return new View("user not found", Response::HTTP_NOT_FOUND);
+  }
+  else {
+   $sn->remove($user);
+   $sn->flush();
+  }
+   return new View("deleted successfully", Response::HTTP_OK);
+  }
+
 }

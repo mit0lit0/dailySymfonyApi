@@ -103,6 +103,31 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        elseif (0 === strpos($pathinfo, '/business')) {
+            // app_business_get
+            if ('/business' === $pathinfo) {
+                if ('GET' !== $canonicalMethod) {
+                    $allow[] = 'GET';
+                    goto not_app_business_get;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\BusinessController::getAction',  '_route' => 'app_business_get',);
+            }
+            not_app_business_get:
+
+            // app_business_codbusiness
+            if (preg_match('#^/business/(?P<codbusiness>[^/]++)$#s', $pathinfo, $matches)) {
+                if ('GET' !== $canonicalMethod) {
+                    $allow[] = 'GET';
+                    goto not_app_business_codbusiness;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'app_business_codbusiness')), array (  '_controller' => 'AppBundle\\Controller\\BusinessController::codbusinessAction',));
+            }
+            not_app_business_codbusiness:
+
+        }
+
         // homepage
         if ('' === $trimmedPathinfo) {
             if (substr($pathinfo, -1) !== '/') {
@@ -159,6 +184,28 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'app_user_coduser')), array (  '_controller' => 'AppBundle\\Controller\\UserController::coduserAction',));
             }
             not_app_user_coduser:
+
+            // app_user_post
+            if ('/user' === $pathinfo) {
+                if ('POST' !== $canonicalMethod) {
+                    $allow[] = 'POST';
+                    goto not_app_user_post;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\UserController::postAction',  '_route' => 'app_user_post',);
+            }
+            not_app_user_post:
+
+            // app_user_delete
+            if (preg_match('#^/user/(?P<coduser>[^/]++)$#s', $pathinfo, $matches)) {
+                if ('DELETE' !== $canonicalMethod) {
+                    $allow[] = 'DELETE';
+                    goto not_app_user_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'app_user_delete')), array (  '_controller' => 'AppBundle\\Controller\\UserController::deleteAction',));
+            }
+            not_app_user_delete:
 
         }
 

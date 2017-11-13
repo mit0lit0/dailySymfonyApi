@@ -29,6 +29,7 @@ class appDevDebugProjectContainer extends Container
 
         $this->services = array();
         $this->normalizedIds = array(
+            'appbundle\\controller\\businesscontroller' => 'AppBundle\\Controller\\BusinessController',
             'appbundle\\controller\\defaultcontroller' => 'AppBundle\\Controller\\DefaultController',
             'appbundle\\controller\\logincontroller' => 'AppBundle\\Controller\\LoginController',
             'appbundle\\controller\\usercontroller' => 'AppBundle\\Controller\\UserController',
@@ -36,6 +37,7 @@ class appDevDebugProjectContainer extends Container
         $this->methodMap = array(
             '1_cb8ba94e3e92c5cf86287ad4def006a2c09927bcef17ce79fe2a91de4b2ae9ba' => 'get1Cb8ba94e3e92c5cf86287ad4def006a2c09927bcef17ce79fe2a91de4b2ae9baService',
             '2_cb8ba94e3e92c5cf86287ad4def006a2c09927bcef17ce79fe2a91de4b2ae9ba' => 'get2Cb8ba94e3e92c5cf86287ad4def006a2c09927bcef17ce79fe2a91de4b2ae9baService',
+            'AppBundle\\Controller\\BusinessController' => 'getAppBundle_Controller_BusinessControllerService',
             'AppBundle\\Controller\\DefaultController' => 'getAppBundle_Controller_DefaultControllerService',
             'AppBundle\\Controller\\LoginController' => 'getAppBundle_Controller_LoginControllerService',
             'AppBundle\\Controller\\UserController' => 'getAppBundle_Controller_UserControllerService',
@@ -413,6 +415,16 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the public 'AppBundle\Controller\BusinessController' shared autowired service.
+     *
+     * @return \AppBundle\Controller\BusinessController
+     */
+    protected function getAppBundle_Controller_BusinessControllerService()
+    {
+        return $this->services['AppBundle\Controller\BusinessController'] = new \AppBundle\Controller\BusinessController();
+    }
+
+    /**
      * Gets the public 'AppBundle\Controller\DefaultController' shared autowired service.
      *
      * @return \AppBundle\Controller\DefaultController
@@ -773,9 +785,6 @@ class appDevDebugProjectContainer extends Container
             return ${($_ = isset($this->services['data_collector.request']) ? $this->services['data_collector.request'] : $this->get('data_collector.request')) && false ?: '_'};
         }, 1 => 'onKernelResponse'), 0);
         $instance->addListener('kernel.request', array(0 => function () {
-            return ${($_ = isset($this->services['debug.debug_handlers_listener']) ? $this->services['debug.debug_handlers_listener'] : $this->get('debug.debug_handlers_listener')) && false ?: '_'};
-        }, 1 => 'configure'), 2048);
-        $instance->addListener('console.command', array(0 => function () {
             return ${($_ = isset($this->services['debug.debug_handlers_listener']) ? $this->services['debug.debug_handlers_listener'] : $this->get('debug.debug_handlers_listener')) && false ?: '_'};
         }, 1 => 'configure'), 2048);
         $instance->addListener('kernel.request', array(0 => function () {
@@ -2590,7 +2599,7 @@ class appDevDebugProjectContainer extends Container
 
         $f = new \Symfony\Component\Security\Http\AccessMap();
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($f, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'main', $a, ${($_ = isset($this->services['debug.event_dispatcher']) ? $this->services['debug.event_dispatcher'] : $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)) && false ?: '_'}, $c), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '59ffafb22cec67.33731816', $a, $d), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, ${($_ = isset($this->services['debug.security.access.decision_manager']) ? $this->services['debug.security.access.decision_manager'] : $this->getDebug_Security_Access_DecisionManagerService()) && false ?: '_'}, $f, $d)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $c, new \Symfony\Component\Security\Http\HttpUtils($e, $e), 'main', NULL, NULL, NULL, $a, false), new \Symfony\Bundle\SecurityBundle\Security\FirewallConfig('main', 'security.user_checker', NULL, true, false, 'security.user.provider.concrete.in_memory', 'main', NULL, NULL, NULL, array(0 => 'anonymous')));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($f, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'main', $a, ${($_ = isset($this->services['debug.event_dispatcher']) ? $this->services['debug.event_dispatcher'] : $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)) && false ?: '_'}, $c), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '5a08e19a3e22f8.50581158', $a, $d), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, ${($_ = isset($this->services['debug.security.access.decision_manager']) ? $this->services['debug.security.access.decision_manager'] : $this->getDebug_Security_Access_DecisionManagerService()) && false ?: '_'}, $f, $d)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $c, new \Symfony\Component\Security\Http\HttpUtils($e, $e), 'main', NULL, NULL, NULL, $a, false), new \Symfony\Bundle\SecurityBundle\Security\FirewallConfig('main', 'security.user_checker', NULL, true, false, 'security.user.provider.concrete.in_memory', 'main', NULL, NULL, NULL, array(0 => 'anonymous')));
     }
 
     /**
@@ -3354,9 +3363,13 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getArgumentResolver_ServiceService()
     {
-        return $this->services['argument_resolver.service'] = new \Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver(new \Symfony\Component\DependencyInjection\ServiceLocator(array('AppBundle\\Controller\\LoginController:setViewHandler' => function () {
+        return $this->services['argument_resolver.service'] = new \Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver(new \Symfony\Component\DependencyInjection\ServiceLocator(array('AppBundle\\Controller\\BusinessController:setViewHandler' => function () {
+            return ${($_ = isset($this->services['service_locator.182f5c5b079727c046caf1a16a7b23a8']) ? $this->services['service_locator.182f5c5b079727c046caf1a16a7b23a8'] : $this->getServiceLocator_182f5c5b079727c046caf1a16a7b23a8Service()) && false ?: '_'};
+        }, 'AppBundle\\Controller\\LoginController:setViewHandler' => function () {
             return ${($_ = isset($this->services['service_locator.182f5c5b079727c046caf1a16a7b23a8']) ? $this->services['service_locator.182f5c5b079727c046caf1a16a7b23a8'] : $this->getServiceLocator_182f5c5b079727c046caf1a16a7b23a8Service()) && false ?: '_'};
         }, 'AppBundle\\Controller\\UserController:setViewHandler' => function () {
+            return ${($_ = isset($this->services['service_locator.182f5c5b079727c046caf1a16a7b23a8']) ? $this->services['service_locator.182f5c5b079727c046caf1a16a7b23a8'] : $this->getServiceLocator_182f5c5b079727c046caf1a16a7b23a8Service()) && false ?: '_'};
+        }, 'AppBundle\\Controller\\BusinessController::setViewHandler' => function () {
             return ${($_ = isset($this->services['service_locator.182f5c5b079727c046caf1a16a7b23a8']) ? $this->services['service_locator.182f5c5b079727c046caf1a16a7b23a8'] : $this->getServiceLocator_182f5c5b079727c046caf1a16a7b23a8Service()) && false ?: '_'};
         }, 'AppBundle\\Controller\\LoginController::setViewHandler' => function () {
             return ${($_ = isset($this->services['service_locator.182f5c5b079727c046caf1a16a7b23a8']) ? $this->services['service_locator.182f5c5b079727c046caf1a16a7b23a8'] : $this->getServiceLocator_182f5c5b079727c046caf1a16a7b23a8Service()) && false ?: '_'};
@@ -3402,7 +3415,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_Annotations_RecorderInnerService($lazyLoad = true)
     {
-        return $this->services['cache.annotations.recorder_inner'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('SRl7Ec-YuB', 0, 'N1qffNfevckllCEM4iloLC', (__DIR__.'/pools'), ${($_ = isset($this->services['monolog.logger.cache']) ? $this->services['monolog.logger.cache'] : $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE)) && false ?: '_'});
+        return $this->services['cache.annotations.recorder_inner'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('SRl7Ec-YuB', 0, 'Fe2UVKoqMuYRrl-ZbSBAR9', (__DIR__.'/pools'), ${($_ = isset($this->services['monolog.logger.cache']) ? $this->services['monolog.logger.cache'] : $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE)) && false ?: '_'});
     }
 
     /**
@@ -3428,7 +3441,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_Serializer_RecorderInnerService($lazyLoad = true)
     {
-        return $this->services['cache.serializer.recorder_inner'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('URssGcE6bK', 0, 'N1qffNfevckllCEM4iloLC', (__DIR__.'/pools'), ${($_ = isset($this->services['monolog.logger.cache']) ? $this->services['monolog.logger.cache'] : $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE)) && false ?: '_'});
+        return $this->services['cache.serializer.recorder_inner'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('URssGcE6bK', 0, 'Fe2UVKoqMuYRrl-ZbSBAR9', (__DIR__.'/pools'), ${($_ = isset($this->services['monolog.logger.cache']) ? $this->services['monolog.logger.cache'] : $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE)) && false ?: '_'});
     }
 
     /**
@@ -3438,7 +3451,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_System_RecorderInnerService($lazyLoad = true)
     {
-        return $this->services['cache.system.recorder_inner'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('bsGP9znzOP', 0, 'N1qffNfevckllCEM4iloLC', (__DIR__.'/pools'), ${($_ = isset($this->services['monolog.logger.cache']) ? $this->services['monolog.logger.cache'] : $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE)) && false ?: '_'});
+        return $this->services['cache.system.recorder_inner'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('bsGP9znzOP', 0, 'Fe2UVKoqMuYRrl-ZbSBAR9', (__DIR__.'/pools'), ${($_ = isset($this->services['monolog.logger.cache']) ? $this->services['monolog.logger.cache'] : $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE)) && false ?: '_'});
     }
 
     /**
@@ -3458,7 +3471,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_Validator_RecorderInnerService($lazyLoad = true)
     {
-        return $this->services['cache.validator.recorder_inner'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('buIYQXGeUE', 0, 'N1qffNfevckllCEM4iloLC', (__DIR__.'/pools'), ${($_ = isset($this->services['monolog.logger.cache']) ? $this->services['monolog.logger.cache'] : $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE)) && false ?: '_'});
+        return $this->services['cache.validator.recorder_inner'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('buIYQXGeUE', 0, 'Fe2UVKoqMuYRrl-ZbSBAR9', (__DIR__.'/pools'), ${($_ = isset($this->services['monolog.logger.cache']) ? $this->services['monolog.logger.cache'] : $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE)) && false ?: '_'});
     }
 
     /**
@@ -3738,7 +3751,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_Provider_Anonymous_MainService()
     {
-        return $this->services['security.authentication.provider.anonymous.main'] = new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('59ffafb22cec67.33731816');
+        return $this->services['security.authentication.provider.anonymous.main'] = new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5a08e19a3e22f8.50581158');
     }
 
     /**
