@@ -3,8 +3,8 @@ AppBundle\Entity\Category:
     table: null
     repositoryClass: AppBundle\Repository\CategoryRepository
     id:
-        id:
-            type: integer
+        codcategory:
+            type: string
             id: true
             generator:
                 strategy: AUTO

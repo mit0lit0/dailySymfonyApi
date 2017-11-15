@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Login;
 
 class UserController extends FOSRestController
 {
@@ -41,6 +42,7 @@ class UserController extends FOSRestController
  public function postAction(Request $request)
  {
    $user = new User;
+   $login = new Login();
    $name = $request->get('name');
    $lastname = $request->get('lastname');
    $codlogin = $request->get('codlogin');
@@ -51,6 +53,15 @@ class UserController extends FOSRestController
      $user->setName($name);
      $user->setLastname($lastname);
      $user->setCodlogin($codlogin);
+     $user->s
+     $login->setCodlogin($codlogin);
+     $login->setPass('12313123asd');
+
+     //return new View($login, Response::HTTP_NOT_ACCEPTABLE);
+     $em2 = $this->getDoctrine()->getManager();
+     $em2->persist($login);
+     $em2->flush();
+
      $em = $this->getDoctrine()->getManager();
      $em->persist($user);
      $pom = $em->flush();
