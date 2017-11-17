@@ -1,7 +1,7 @@
-AppBundle\Entity\Category:
+AppBundle\Entity\Photo:
     type: entity
     table: null
-    repositoryClass: AppBundle\Repository\CategoryRepository
+    repositoryClass: AppBundle\Repository\PhotoRepository
     id:
         id:
             type: integer
@@ -9,12 +9,10 @@ AppBundle\Entity\Category:
             generator:
                 strategy: AUTO
     fields:
-        name:
+        url:
             type: string
             length: 255
-            unique: true
         description:
             type: string
             length: 255
-            nullable: true
     lifecycleCallbacks: {  }

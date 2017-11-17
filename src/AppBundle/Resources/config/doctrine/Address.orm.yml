@@ -1,7 +1,7 @@
-AppBundle\Entity\Business:
+AppBundle\Entity\Address:
     type: entity
     table: null
-    repositoryClass: AppBundle\Repository\BusinessRepository
+    repositoryClass: AppBundle\Repository\AddressRepository
     id:
         id:
             type: integer
@@ -9,23 +9,23 @@ AppBundle\Entity\Business:
             generator:
                 strategy: AUTO
     fields:
-        oficialname:
+        country:
             type: string
             length: 255
-        addressf:
-            type: integer
-            nullable: true
-        categoryf:
-            type: integer
-            length: 255
-        description:
+            unique: false
+        postalCode:
             type: string
             length: 255
+            unique: false
             nullable: true
-        photof:
-            type: integer
+        street:
+            type: string
+            length: 255
+            unique: false
             nullable: true
-        contactf:
-            type: integer
+        city:
+            type: string
+            length: 255
+            unique: false
             nullable: true
     lifecycleCallbacks: {  }

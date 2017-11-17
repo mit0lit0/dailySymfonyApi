@@ -3,9 +3,9 @@
 namespace AppBundle\Entity;
 
 /**
- * Category
+ * UserBusiness
  */
-class Category
+class UserBusiness
 {
     /**
      * @var int
@@ -20,12 +20,12 @@ class Category
     /**
      * @var string
      */
-    private $description;
+    private $lastname;
 
     /**
      * @var string
      */
-    private $codcategory;
+    private $email;
 
 
     /**
@@ -43,7 +43,7 @@ class Category
      *
      * @param string $name
      *
-     * @return Category
+     * @return UserBusiness
      */
     public function setName($name)
     {
@@ -63,51 +63,50 @@ class Category
     }
 
     /**
-     * Set description
+     * Set lastname
      *
-     * @param string $description
+     * @param string $lastname
      *
-     * @return Category
+     * @return UserBusiness
      */
-    public function setDescription($description)
+    public function setLastname($lastname)
     {
-        $this->description = $description;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get lastname
      *
      * @return string
      */
-    public function getDescription()
+    public function getLastname()
     {
-        return $this->description;
+        return $this->lastname;
     }
 
     /**
-     * Set codcategory
+     * Set email
      *
-     * @param string $codcategory
+     * @param string $email
      *
-     * @return Category
+     * @return UserBusiness
      */
-    public function setCodcategory($codcategory)
+    public function setEmail($email)
     {
-        $this->codcategory = $codcategory;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Get codcategory
+     * Get email
      *
      * @return string
      */
-    public function getCodcategory()
+    public function getEmail()
     {
-        return $this->codcategory;
+        return $this->email;
     }
-
 }

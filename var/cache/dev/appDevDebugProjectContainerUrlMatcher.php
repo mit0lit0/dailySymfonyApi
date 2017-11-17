@@ -128,6 +128,53 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        elseif (0 === strpos($pathinfo, '/category')) {
+            // app_category_get
+            if ('/category' === $pathinfo) {
+                if ('GET' !== $canonicalMethod) {
+                    $allow[] = 'GET';
+                    goto not_app_category_get;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::getAction',  '_route' => 'app_category_get',);
+            }
+            not_app_category_get:
+
+            // app_category_id
+            if (preg_match('#^/category/(?P<codcategory>[^/]++)$#s', $pathinfo, $matches)) {
+                if ('GET' !== $canonicalMethod) {
+                    $allow[] = 'GET';
+                    goto not_app_category_id;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'app_category_id')), array (  '_controller' => 'AppBundle\\Controller\\CategoryController::idAction',));
+            }
+            not_app_category_id:
+
+            // app_category_post
+            if ('/category' === $pathinfo) {
+                if ('POST' !== $canonicalMethod) {
+                    $allow[] = 'POST';
+                    goto not_app_category_post;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::postAction',  '_route' => 'app_category_post',);
+            }
+            not_app_category_post:
+
+            // app_category_delete
+            if (preg_match('#^/category/(?P<codcategory>[^/]++)$#s', $pathinfo, $matches)) {
+                if ('DELETE' !== $canonicalMethod) {
+                    $allow[] = 'DELETE';
+                    goto not_app_category_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'app_category_delete')), array (  '_controller' => 'AppBundle\\Controller\\CategoryController::deleteAction',));
+            }
+            not_app_category_delete:
+
+        }
+
         // homepage
         if ('' === $trimmedPathinfo) {
             if (substr($pathinfo, -1) !== '/') {
@@ -163,6 +210,53 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
 
         elseif (0 === strpos($pathinfo, '/user')) {
+            if (0 === strpos($pathinfo, '/userbusiness')) {
+                // app_userbusiness_get
+                if ('/userbusiness' === $pathinfo) {
+                    if ('GET' !== $canonicalMethod) {
+                        $allow[] = 'GET';
+                        goto not_app_userbusiness_get;
+                    }
+
+                    return array (  '_controller' => 'AppBundle\\Controller\\UserBusinessController::getAction',  '_route' => 'app_userbusiness_get',);
+                }
+                not_app_userbusiness_get:
+
+                // app_userbusiness_coduser
+                if (preg_match('#^/userbusiness/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ('GET' !== $canonicalMethod) {
+                        $allow[] = 'GET';
+                        goto not_app_userbusiness_coduser;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'app_userbusiness_coduser')), array (  '_controller' => 'AppBundle\\Controller\\UserBusinessController::coduserAction',));
+                }
+                not_app_userbusiness_coduser:
+
+            }
+
+            // app_userbusiness_post
+            if ('/userBusiness' === $pathinfo) {
+                if ('POST' !== $canonicalMethod) {
+                    $allow[] = 'POST';
+                    goto not_app_userbusiness_post;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\UserBusinessController::postAction',  '_route' => 'app_userbusiness_post',);
+            }
+            not_app_userbusiness_post:
+
+            // app_userbusiness_delete
+            if (preg_match('#^/user/(?P<coduser>[^/]++)$#s', $pathinfo, $matches)) {
+                if ('DELETE' !== $canonicalMethod) {
+                    $allow[] = 'DELETE';
+                    goto not_app_userbusiness_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'app_userbusiness_delete')), array (  '_controller' => 'AppBundle\\Controller\\UserBusinessController::deleteAction',));
+            }
+            not_app_userbusiness_delete:
+
             // app_user_get
             if ('/user' === $pathinfo) {
                 if ('GET' !== $canonicalMethod) {

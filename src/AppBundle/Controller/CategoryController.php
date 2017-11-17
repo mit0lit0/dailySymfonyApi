@@ -34,4 +34,41 @@ class CategoryController extends FOSRestController
    }
   return $singleresult;
   }
+
+  /**
+   * @Rest\Post("/category")
+   */
+   public function postAction(Request $request)
+   {
+     $data = new Category;
+     $name = $request->get('name');
+     $description = $request->get('description');
+     if(empty($name) || empty($description))
+     {
+       return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
+     }
+    $data->setName($name);
+    $data->setDescription($description);
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($data);
+    $em->flush();
+    return new View("Category Added Successfully", Response::HTTP_OK);
+   }
+
+   /**
+   * @Rest\Delete("/category/{codcategory}")
+   */
+   public function deleteAction($codcategory)
+   {
+    $data = new Category;
+    $sn = $this->getDoctrine()->getManager();
+    $category = $this->getDoctrine()->getRepository('AppBundle:User')->find($codcategory);
+    if (empty($category)) {
+      return new View("category not found", Response::HTTP_NOT_FOUND);
+     }else {
+      $sn->remove($category);
+      $sn->flush();
+     }
+      return new View("deleted successfully", Response::HTTP_OK);
+     }
 }

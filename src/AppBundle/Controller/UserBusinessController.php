@@ -8,36 +8,35 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
-use AppBundle\Entity\User;
-use AppBundle\Entity\Login;
+use AppBundle\Entity\UserBusiness;
 
-class UserController extends FOSRestController
+class UserBusinessController extends FOSRestController
 {
     /**
-   * @Rest\Get("/user")
+   * @Rest\Get("/userbusiness")
    */
   public function getAction()
   {
-    $restresult = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
+    $restresult = $this->getDoctrine()->getRepository('AppBundle:UserBusiness')->findAll();
       if ($restresult === null) {
-        return new View("there are no users exist", Response::HTTP_NOT_FOUND);
+        return new View("there are no users business exist", Response::HTTP_NOT_FOUND);
    }
       return $restresult;
   }
   /**
-  * @Rest\Get("/user/{coduser}")
+  * @Rest\Get("/userbusiness/{id}")
   */
-  public function coduserAction($coduser)
+  public function coduserAction($id)
   {
-   $singleresult = $this->getDoctrine()->getRepository('AppBundle:User')->find($coduser);
+   $singleresult = $this->getDoctrine()->getRepository('AppBundle:UserBusiness')->find($coduser);
    if ($singleresult === null) {
-   return new View("user not found", Response::HTTP_NOT_FOUND);
+   return new View("userBusiness not found", Response::HTTP_NOT_FOUND);
    }
   return $singleresult;
   }
 
   /**
- * @Rest\Post("/user")
+ * @Rest\Post("/userBusiness")
  */
  public function postAction(Request $request)
  {

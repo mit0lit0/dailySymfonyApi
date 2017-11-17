@@ -1,7 +1,7 @@
-AppBundle\Entity\Business:
+AppBundle\Entity\Contact:
     type: entity
     table: null
-    repositoryClass: AppBundle\Repository\BusinessRepository
+    repositoryClass: AppBundle\Repository\ContactRepository
     id:
         id:
             type: integer
@@ -9,23 +9,28 @@ AppBundle\Entity\Business:
             generator:
                 strategy: AUTO
     fields:
-        oficialname:
-            type: string
-            length: 255
-        addressf:
-            type: integer
-            nullable: true
-        categoryf:
-            type: integer
-            length: 255
-        description:
+        phone:
             type: string
             length: 255
             nullable: true
-        photof:
-            type: integer
+        email:
+            type: string
+            length: 255
             nullable: true
-        contactf:
-            type: integer
+        facebook:
+            type: string
+            length: 255
+            nullable: true
+        web:
+            type: string
+            length: 255
+            nullable: true
+        fax:
+            type: string
+            length: 255
+            nullable: true
+        mobilePhone:
+            type: string
+            length: 255
             nullable: true
     lifecycleCallbacks: {  }

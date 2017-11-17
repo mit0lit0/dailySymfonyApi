@@ -3,9 +3,9 @@
 namespace AppBundle\Entity;
 
 /**
- * Category
+ * Photo
  */
-class Category
+class Photo
 {
     /**
      * @var int
@@ -15,17 +15,12 @@ class Category
     /**
      * @var string
      */
-    private $name;
+    private $url;
 
     /**
      * @var string
      */
     private $description;
-
-    /**
-     * @var string
-     */
-    private $codcategory;
 
 
     /**
@@ -39,27 +34,27 @@ class Category
     }
 
     /**
-     * Set name
+     * Set url
      *
-     * @param string $name
+     * @param string $url
      *
-     * @return Category
+     * @return Photo
      */
-    public function setName($name)
+    public function setUrl($url)
     {
-        $this->name = $name;
+        $this->url = $url;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get url
      *
      * @return string
      */
-    public function getName()
+    public function getUrl()
     {
-        return $this->name;
+        return $this->url;
     }
 
     /**
@@ -67,7 +62,7 @@ class Category
      *
      * @param string $description
      *
-     * @return Category
+     * @return Photo
      */
     public function setDescription($description)
     {
@@ -85,29 +80,5 @@ class Category
     {
         return $this->description;
     }
-
-    /**
-     * Set codcategory
-     *
-     * @param string $codcategory
-     *
-     * @return Category
-     */
-    public function setCodcategory($codcategory)
-    {
-        $this->codcategory = $codcategory;
-
-        return $this;
-    }
-
-    /**
-     * Get codcategory
-     *
-     * @return string
-     */
-    public function getCodcategory()
-    {
-        return $this->codcategory;
-    }
-
 }
+

@@ -1,7 +1,7 @@
-AppBundle\Entity\Category:
+AppBundle\Entity\UserBusiness:
     type: entity
     table: null
-    repositoryClass: AppBundle\Repository\CategoryRepository
+    repositoryClass: AppBundle\Repository\UserBusinessRepository
     id:
         id:
             type: integer
@@ -12,9 +12,13 @@ AppBundle\Entity\Category:
         name:
             type: string
             length: 255
-            unique: true
-        description:
+            nullable: true
+        lastname:
             type: string
             length: 255
             nullable: true
+        email:
+            type: string
+            length: 255
+            unique: true
     lifecycleCallbacks: {  }
